@@ -1,0 +1,25 @@
+{% extends 'main.html' %}
+{% block content %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login</title>
+</head>
+<body>
+    <h1>Login</h1>
+    <form method="post">
+        {% csrf_token %}
+        <div>
+            <label for="email">Email:</label>
+            <input type="email" name="email" required>
+        </div>
+        <div>
+            <label for="password">Password:</label>
+            <input type="password" name="password" required>
+        </div>
+        <input type="submit" value="signin">
+    </form>
+</body>
+</html>
+
+{% endblock content %}
