@@ -1,4 +1,25 @@
 {% extends 'main.html' %}
 {% block content %}
-
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/main.css' %}">
+<div class="container main-wrapper">
+    <a href="#">
+       <div class="card img-fluid cards" >
+            <img class="card-img-top" src="{% static 'images/logo.png' %}" alt="Card image" style="width:100%">
+            <p class="card-img-overlay">
+            <h4 class="card-title">Inventory</h4>
+            </p>
+        </div> 
+    </a>
+    
+    <a href="#">
+       <div class="card img-fluid cards" >
+            <img class="card-img-top" src="{% static 'images/table.png' %}" alt="Card image" style="width:100%">
+            <p class="card-img-overlay">
+                <h4 class="card-title">Enter Knapsack</h4>
+            </p>
+        </div> 
+    </a>
+    
+</div>
 {% endblock content %}

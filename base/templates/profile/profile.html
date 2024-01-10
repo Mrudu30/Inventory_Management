@@ -1,14 +1,24 @@
 {% extends 'main.html' %}
 {% block content %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/main.css' %}">
 <head>
     <title>User Profile</title>
 </head>
 <body>
-    <h1>User Profile</h1>
-    <p>Username: <strong>{{ user.username }}</strong></p>
-    <p>Email: <strong>{{ user.email }}</strong></p>
-    <p>First Name: <strong>{{ user.first_name }}</strong></p>
-    <p>Last Name: <strong>{{ user.last_name }}</strong></p>
+    <div class="mx-2">
+        <div class="top-wrapper my-3">
+            <h3>User Profile</h3>
+            <a href="{% url 'edit_details' user.id %}" class="btn btn-info edit">Edit Details</a> 
+        </div>
+        <p>Username: <strong>{{ user.username }}</strong></p>
+        <p>Email: <strong>{{ user.email }}</strong></p>
+        <p>First Name: <strong>{{ user.first_name }}</strong></p>
+        <p>Last Name: <strong>{{ user.last_name }}</strong></p>  
+    </div>
+    <div>
+        <p><strong>----- Inventory Found -----</strong></p>
+    </div>
 </body>
 </html>
 {% endblock content %}

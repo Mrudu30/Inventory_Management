@@ -4,6 +4,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm,AuthenticationForm
 from django.db import IntegrityError
+from .forms import edit_user_form
 
 # Create your views here.
 def home(request):
@@ -53,3 +54,16 @@ def signin(request):
         else: 
             login(request,user)
             return redirect('home')
+        
+def edit_user(request,pk):
+    user = User.objects.get(id=pk)  
+    form = edit_user_form(instance=user)
+    
+    if request.method == 'POST':
+        form = edit_user_form(request.POST,instance=user)
+        if form.is_valid():
+            form.save()
+            return redirect('profile')
+        
+    context = {'user':user,'form':form}
+    return render(request,'profile/signup.html',context)    
