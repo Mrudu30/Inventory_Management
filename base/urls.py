@@ -10,4 +10,5 @@ urlpatterns = [
     path('edit_details/=?<str:pk>/',views.edit_user,name='edit_details'),
     path('inventory/<str:pk>/',views.inventory,name='inventory'),
     path('edit_inventory/<str:pk>/',views.edit_inventory,name='edit_inventory'),
+    path('inventory/<str:pk>/add_product/',views.add_products,name='add_product'),
 ]

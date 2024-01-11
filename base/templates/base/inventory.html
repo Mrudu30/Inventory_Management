@@ -3,12 +3,24 @@
 {% load static %}
 <link rel="stylesheet" href="{% static 'css/main.css' %}">
     <div class="container">
-        <h1>{{ inventory.name }}</h1>
-        <ul>
-            {% for product in inventory.products_present.all %}
-                <li>{{ product.pname }} - {{ product.weight }} - {{ product.value }}</li>
-            {% endfor %}
-        </ul>
-        <a href="{% url 'edit_inventory' inventory.id %}">Edit Inventory</a>
+        <div class="title-wrapper">
+           <h1>{{ inventory.name }}</h1>
+            <a class="btn btn-info" href="{% url 'edit_inventory' inventory.id %}">Edit Inventory</a>
+        </div>
+        <br>
+        <div class="product-wrapper">
+            <p class="pro_btn">
+                <a class="btn btn-info" href="{% url 'add_product' inventory.id %}">Add Products</a>
+            </p>
+           <ul>
+                {% for product in inventory.products_present.all %}
+                    <li class="product">
+                        <h4>{{ product.pname }}</h4>
+                        <br>  
+                        Weight (In Kgs): {{ product.weight }} --------- Value (Per Kg):{{ product.value }}
+                    </li>
+                {% endfor %}
+            </ul> 
+        </div>
     <div>    
 {% endblock content %}

@@ -6,7 +6,7 @@ from django.contrib.auth.forms import UserCreationForm,AuthenticationForm
 from django.db import IntegrityError
 from . import forms as f
 from . import models as m
-from django.http import Http404
+from django.http import Http404,HttpResponse
 
 # Create your views here.
 @login_required(login_url='signin')
@@ -100,26 +100,52 @@ def inventory(request,pk):
     inventory = m.Inventory.objects.get(id=pk)
     products = inventory.products_present.all()
     
-    context = {'inventory':inventory,"products":products}
-    return render(request,'base/inventory.html',context)
+    if request.user != inventory.user:
+        return Http404()
+    else:
+        context = {'inventory':inventory,"products":products}
+        return render(request,'base/inventory.html',context)
 
 @login_required(login_url='signin')
 def edit_inventory(request,pk):
     inventory = get_object_or_404(m.Inventory, id=pk)
-    if request.method == 'POST':
-        form = f.edit_inventory(request.POST, instance=inventory)
-        if form.is_valid():
-            form.save()
-            return redirect('inventory', pk=inventory.id)
+    if request.user != inventory.user:
+        return Http404()
     else:
-        form = f.edit_inventory(instance=inventory)
-    context = {
-        'title': 'Edit Inventory',
-        'form': form,
-        'inventory': inventory
-    }
-    return render(request, 'base/form_rendering.html', context)
+        if request.method == 'POST':
+            form = f.edit_inventory(request.POST, instance=inventory)
+            if form.is_valid():
+                form.save()
+                return redirect('inventory', pk=inventory.id)
+        else:
+            form = f.edit_inventory(instance=inventory)
+        context = {
+            'title': 'Edit Inventory',
+            'form': form,
+            'inventory': inventory
+        }
+        return render(request, 'base/form_rendering.html', context)
 
 # ------- Product Management -------
 
 # adding products
+@login_required(login_url='signin')
+def add_products(request,pk):
+    inventory = get_object_or_404(m.Inventory,id=pk)
+    if request.user != inventory.user:
+        return HttpResponse('User Not Allowed to Change <a href="/">home</a>')
+    if request.method == "POST":
+        form = f.product_adding(request.POST)
+        if form.is_valid():
+            product = form.save(commit=False)
+            product.save()
+            inventory.products_present.add(product)
+            return redirect('inventory',pk = inventory.id)
+    else:
+        form = f.product_adding()
+    context = {
+        'title': 'Add Product',
+        'form': form,
+        'inventory': inventory
+    }
+    return render(request, 'base/form_rendering.html', context)
