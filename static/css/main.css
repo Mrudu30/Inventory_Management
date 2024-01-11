@@ -4,9 +4,10 @@
 }
 
 .nav-link{
-    font-size: 22px;
+    font-size: 25px;
 }
 
+/* ------- Home Cards ------- */
 .cards{
     display: flex;
     width: 500px;
@@ -31,4 +32,42 @@
 .card-title{
     color: black;
     text-decoration: none;
+}
+
+/* ------- Form Css ------- */
+.form-wrapper{
+    padding-top: 50px;
+    background-color: rgb(250, 181, 116);
+    align-items: center;
+    border-radius: 10px;
+    width: 30rem;
+    height: 30rem;
+    margin: auto;
+    text-transform: capitalize;
+}
+
+.form-container{
+    display: block;
+    padding: 30px;
+    align-items: center;
+    text-align: center;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+.form-wrapper label{
+    display: block;
+    font-size: 25px;
+}
+
+.form-wrapper div{
+    margin: 20px;
+    margin-top: 20px;
+}
+.form-wrapper input{
+    width:70%;
+    border-radius: 5px;
+    font-size: 20px;
+    display: block;
+    margin-left: 55px;
+    align-self: center;
 }

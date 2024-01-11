@@ -2,16 +2,29 @@
 {% block content %}
 <!DOCTYPE html>
 <html>
-<head>
-    <title>Sign Up</title>
-</head>
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/main.css' %}">
 <body>
-    <h1>Sign Up</h1>
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <input type="submit" value="Submit">
-    </form>
+    <div class="form-container">    
+        <form method="post" class="form-wrapper">
+            <h1>Sign Up</h1>
+            {% csrf_token %}
+            <div>
+                <label for="id_username">Username:</label>
+                <input type="text" name="username" maxlength="150" autocapitalize="none" autocomplete="username" autofocus="" required="" id="id_username">
+            </div>
+            <div>
+                <label for="id_password1">Password:</label>
+                <input type="password" name="password1" autocomplete="new-password" required="" id="id_password1" aria-autocomplete="list"> 
+                <span class="helptext"></span>
+            </div>
+            <div>
+                <label for="id_password2">Password confirmation:</label>
+                <input type="password" name="password2" autocomplete="new-password" required="" id="id_password2">
+            </div>       
+            <input type="submit" value="Submit">
+        </form>
+    </div>
 </body>
 </html>
 {% endblock content %}

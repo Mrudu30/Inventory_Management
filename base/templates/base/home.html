@@ -3,7 +3,7 @@
 {% load static %}
 <link rel="stylesheet" href="{% static 'css/main.css' %}">
 <div class="container main-wrapper">
-    <a href="#">
+    <a href="{% url 'inventory' pk=inventory.id %}">
        <div class="card img-fluid cards" >
             <img class="card-img-top" src="{% static 'images/logo.png' %}" alt="Card image" style="width:100%">
             <p class="card-img-overlay">

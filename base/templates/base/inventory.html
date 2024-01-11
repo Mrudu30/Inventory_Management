@@ -1,0 +1,14 @@
+{% extends 'main.html' %}
+{% block content %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/main.css' %}">
+    <div class="container">
+        <h1>{{ inventory.name }}</h1>
+        <ul>
+            {% for product in inventory.products_present.all %}
+                <li>{{ product.pname }} - {{ product.weight }} - {{ product.value }}</li>
+            {% endfor %}
+        </ul>
+        <a href="{% url 'edit_inventory' inventory.id %}">Edit Inventory</a>
+    <div>    
+{% endblock content %}

@@ -1,14 +1,38 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render,redirect,get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm,AuthenticationForm
 from django.db import IntegrityError
-from .forms import edit_user_form
+from . import forms as f
+from . import models as m
+from django.http import Http404
 
 # Create your views here.
+@login_required(login_url='signin')
+def create_inventory(request):
+    if request.user:
+        user = request.user
+        inventory = m.Inventory.objects.filter(user=user).first()
+        if inventory is None:
+            inventory = m.Inventory.objects.create(user=user, name='My Inventory')
+        return redirect('inventory', pk=inventory.id)
+    
+@login_required(login_url='signin')
 def home(request):
-    return render(request,'base/home.html')
+    if request.user:
+        user = request.user
+        inventory = m.Inventory.objects.filter(user=user).first()
+        if inventory is None:
+            inventory = m.Inventory.objects.create(user=user, name='My Inventory')
+        context = {
+            'inventory': inventory
+        } 
+        return render(request, 'base/home.html', context)
+    else:
+        return render(request,'base/home.html')
+
+# ------ User Profile ------
 
 @login_required(login_url='signin')
 def profile(request):
@@ -57,13 +81,45 @@ def signin(request):
         
 def edit_user(request,pk):
     user = User.objects.get(id=pk)  
-    form = edit_user_form(instance=user)
+    form = f.edit_user_form(instance=user)
     
     if request.method == 'POST':
-        form = edit_user_form(request.POST,instance=user)
+        form = f.edit_user_form(request.POST,instance=user)
         if form.is_valid():
             form.save()
             return redirect('profile')
         
     context = {'user':user,'form':form}
     return render(request,'profile/signup.html',context)    
+
+# ------- Inventory Management -------
+
+# inventory showing
+@login_required(login_url='signin')
+def inventory(request,pk):
+    inventory = m.Inventory.objects.get(id=pk)
+    products = inventory.products_present.all()
+    
+    context = {'inventory':inventory,"products":products}
+    return render(request,'base/inventory.html',context)
+
+@login_required(login_url='signin')
+def edit_inventory(request,pk):
+    inventory = get_object_or_404(m.Inventory, id=pk)
+    if request.method == 'POST':
+        form = f.edit_inventory(request.POST, instance=inventory)
+        if form.is_valid():
+            form.save()
+            return redirect('inventory', pk=inventory.id)
+    else:
+        form = f.edit_inventory(instance=inventory)
+    context = {
+        'title': 'Edit Inventory',
+        'form': form,
+        'inventory': inventory
+    }
+    return render(request, 'base/form_rendering.html', context)
+
+# ------- Product Management -------
+
+# adding products
