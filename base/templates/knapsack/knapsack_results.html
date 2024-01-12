@@ -1,0 +1,22 @@
+{% extends 'main.html' %}
+
+{% block content %}
+  <h1>Knapsack Results</h1>
+  <p>Total value: <strong>{{ total_value|floatformat:2 }}</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Weight</th>
+        <th>Value</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for weight, value in selected_items %}
+        <tr>
+          <td>{{ weight }}</td>
+          <td>{{ value|floatformat:2 }}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}

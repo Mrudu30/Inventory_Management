@@ -11,4 +11,7 @@ urlpatterns = [
     path('inventory/<str:pk>/',views.inventory,name='inventory'),
     path('edit_inventory/<str:pk>/',views.edit_inventory,name='edit_inventory'),
     path('inventory/<str:pk>/add_product/',views.add_products,name='add_product'),
+    path('knapsack/', views.knapsack, name='knapsack'),
+    path('knapsack_results/<str:capacity>/<str:items>/', views.knapsack_results, name='knapsack_results'),
+    path('knapsack_items/<str:num_items>/<str:capacity>/',views.knapsack_items,name='knapsack_items'),
 ]

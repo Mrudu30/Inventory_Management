@@ -101,3 +101,8 @@
     display: block;
     margin-bottom: 5px;
 }
+
+/* ---------- Knapsack Styling ------------ */
+.knapsack-wrapper{
+    margin: 20px;
+}
