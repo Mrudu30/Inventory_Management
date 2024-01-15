@@ -6,11 +6,11 @@
         <div class="title-wrapper">
            <h1>{{ inventory.name }}</h1>
             <a class="btn btn-info" href="{% url 'edit_inventory' inventory.id %}">Edit Inventory</a>
+            <a class="btn btn-info" href="{% url 'add_product' inventory.id %}">Add Products</a>
         </div>
         <br>
         <div class="product-wrapper">
             <p class="pro_btn">
-                <a class="btn btn-info" href="{% url 'add_product' inventory.id %}">Add Products</a>
             </p>
            <ul>
                 {% for product in inventory.products_present.all %}

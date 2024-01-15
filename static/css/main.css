@@ -36,8 +36,8 @@
 
 /* ------- Form Css ------- */
 .form-wrapper{
-    padding-top: auto;
-    background-color: rgb(250, 181, 116);
+    padding: 50px;
+    background-color: rgb(250, 221, 116);
     align-items: center;
     border-radius: 10px;
     width: 30rem;
@@ -104,5 +104,43 @@
 
 /* ---------- Knapsack Styling ------------ */
 .knapsack-wrapper{
+    padding: 10px;
+    text-align: center;
+}
+
+.form-knap .row{
+    display: block;
+}
+
+.form-knap .col-12:last-child{
+    width: 60%;
+    margin: 0px auto;
+}
+
+.title{
+    padding: 0px;
+    margin: 10px;
+    text-align: center;
+}
+.form-knap form{
+    text-align: center;
+}
+.knap{
+    display: flex;
+    justify-content: center;
+}
+.knap th , .knap td{
+    padding: 10px;
+}
+.btn{
     margin: 20px;
+}
+.knap-result {
+    margin: 0px auto;
+}
+.knap-result tr{
+    text-align: center;
+}
+.knap-result th,.knap-result td{
+    padding: 5px 20px;
 }

@@ -20,7 +20,7 @@ class Migration(migrations.Migration):
             name='Product',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('pname', models.CharField(default='item', max_length=30)),
+                ('product_name', models.CharField(default='item', max_length=30)),
                 ('weight', models.FloatField()),
                 ('value', models.FloatField()),
                 ('date_added', models.DateTimeField(default=django.utils.timezone.now)),

@@ -1,9 +1,11 @@
 {% extends 'main.html' %}
 
 {% block content %}
-  <h1>Knapsack Results</h1>
-  <p>Total value: <strong>{{ total_value|floatformat:2 }}</strong></p>
-  <table>
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/main.css' %}">
+  <h1 class="title">Knapsack Results</h1>
+  <p style="text-align:center">Total value: <strong>{{ total_value|floatformat:2 }}</strong></p>
+  <table class="knap-result">
     <thead>
       <tr>
         <th>Weight</th>
@@ -19,4 +21,5 @@
       {% endfor %}
     </tbody>
   </table>
+  
 {% endblock %}
