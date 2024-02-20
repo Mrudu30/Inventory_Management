@@ -93,7 +93,7 @@ def edit_user(request,pk):
             return redirect('profile')
         
     context = {'user':user,'form':form}
-    return render(request,'profile/signup.html',context)    
+    return render(request,'base/form_rendering.html',context)    
 
 # ------- Inventory Management -------
 
