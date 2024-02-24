@@ -171,7 +171,8 @@ def knapsack_items(request,num_items,capacity):
         knapresult = reverse('knapsack_results',kwargs=context)
         return redirect(knapresult)
     else:    
-        return render(request, 'knapsack/knapsack_items.html', {'num_items': num_items, 'capacity': capacity,'render_items':item_render})
+        context = {'num_items': num_items, 'capacity': capacity,'render_items':item_render}
+        return render(request, 'knapsack/knapsack_items.html',context)
     
 def knapsack(request):
     if request.method == 'POST':
